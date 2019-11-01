@@ -19,6 +19,7 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.themeTextStyle
 import androidx.ui.material.withOpacity
 import androidx.ui.res.imageResource
+import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
 
 class MainActivity : AppCompatActivity() {
@@ -47,7 +48,9 @@ fun NewsStory() {
 
             HeightSpacer(height = 16.dp)
 
-            Text(text = "A day in Shark Fin Cove",
+            Text(text = "A day wandering through the sandhills in Shark " +
+                    "Fin Cove, and a few of the sights I saw",
+                maxLines = 2, overflow = TextOverflow.Ellipsis,
                 style = (+themeTextStyle { h6 }).withOpacity(0.87f))
             Text(text = "Davenport, California",
                 style = (+themeTextStyle { body2 }).withOpacity(0.87f))
