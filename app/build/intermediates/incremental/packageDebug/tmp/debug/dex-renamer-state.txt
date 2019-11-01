@@ -1,0 +1,7 @@
+#Fri Nov 01 11:27:55 JST 2019
+base.0=/Users/i001197/work/android/ComposeTutorial/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+path.1=classes.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=/Users/i001197/work/android/ComposeTutorial/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex
