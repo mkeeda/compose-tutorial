@@ -16,6 +16,8 @@ import androidx.ui.layout.HeightSpacer
 import androidx.ui.layout.LayoutSize
 import androidx.ui.layout.Spacing
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.themeTextStyle
+import androidx.ui.material.withOpacity
 import androidx.ui.res.imageResource
 import androidx.ui.tooling.preview.Preview
 
@@ -23,39 +25,40 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
-                NewsStory()
-            }
+            NewsStory()
         }
     }
 }
 
 @Composable
 fun NewsStory() {
-    val image = +imageResource(R.drawable.header)
+    MaterialTheme {
+        val image = +imageResource(R.drawable.header)
 
-    Column(
-        crossAxisSize = LayoutSize.Expand,
-        modifier = Spacing(16.dp)
-    ) {
-        Container(expanded = true, height = 180.dp) {
-            Clip(shape = RoundedCornerShape(8.dp)) {
-                DrawImage(image = image)
+        Column(
+            crossAxisSize = LayoutSize.Expand,
+            modifier = Spacing(16.dp)
+        ) {
+            Container(expanded = true, height = 180.dp) {
+                Clip(shape = RoundedCornerShape(8.dp)) {
+                    DrawImage(image = image)
+                }
             }
+
+            HeightSpacer(height = 16.dp)
+
+            Text(text = "A day in Shark Fin Cove",
+                style = (+themeTextStyle { h6 }).withOpacity(0.87f))
+            Text(text = "Davenport, California",
+                style = (+themeTextStyle { body2 }).withOpacity(0.87f))
+            Text(text = "December 2018",
+                style = (+themeTextStyle { body2 }).withOpacity(0.6f))
         }
-
-        HeightSpacer(height = 16.dp)
-
-        Text(text = "A day in Shark Fin Cove")
-        Text(text = "Davenport, California")
-        Text(text = "December 2018")
     }
 }
 
 @Preview
 @Composable
 fun DefaultPreview() {
-    MaterialTheme {
-        NewsStory()
-    }
+    NewsStory()
 }
