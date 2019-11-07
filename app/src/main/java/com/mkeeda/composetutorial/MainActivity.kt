@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                MyScreenContent()
+                MyScreenContent(newsItems = sampleNewsItems)
             }
         }
     }
@@ -43,21 +43,20 @@ fun MyApp(child: @Composable() () -> Unit) {
 }
 
 @Composable
-fun MyScreenContent() {
+fun MyScreenContent(newsItems: List<NewsItem>) {
     VerticalScroller {
         Column(modifier = Spacing(8.dp)) {
-            NewsStory()
-            HeightSpacer(height = 16.dp)
-            NewsStory()
-            HeightSpacer(height = 16.dp)
-            NewsStory()
+            newsItems.forEach {
+                NewsStory(newsItem = it)
+                HeightSpacer(height = 16.dp)
+            }
         }
     }
 }
 
 @Composable
-fun NewsStory() {
-    val image = +imageResource(R.drawable.header)
+fun NewsStory(newsItem: NewsItem) {
+    val image = +imageResource(newsItem.imageId)
 
     Card(elevation = 2.dp, shape = RoundedCornerShape(4.dp)) {
         Column(
@@ -72,13 +71,12 @@ fun NewsStory() {
 
             HeightSpacer(height = 16.dp)
 
-            Text(text = "A day wandering through the sandhills in Shark " +
-                    "Fin Cove, and a few of the sights I saw",
+            Text(text = newsItem.title,
                 maxLines = 2, overflow = TextOverflow.Ellipsis,
                 style = (+themeTextStyle { h6 }).withOpacity(0.87f))
-            Text(text = "Davenport, California",
+            Text(text = newsItem.author,
                 style = (+themeTextStyle { body2 }).withOpacity(0.87f))
-            Text(text = "December 2018",
+            Text(text = newsItem.date,
                 style = (+themeTextStyle { body2 }).withOpacity(0.6f))
         }
     }
@@ -88,6 +86,6 @@ fun NewsStory() {
 @Composable
 fun DefaultPreview() {
     MyApp {
-        MyScreenContent()
+        MyScreenContent(newsItems = sampleNewsItems)
     }
 }
