@@ -3,7 +3,9 @@ package com.mkeeda.composetutorial
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.Model
 import androidx.compose.unaryPlus
+import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.core.setContent
@@ -15,6 +17,7 @@ import androidx.ui.layout.Container
 import androidx.ui.layout.HeightSpacer
 import androidx.ui.layout.LayoutSize
 import androidx.ui.layout.Spacing
+import androidx.ui.material.Button
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Card
 import androidx.ui.material.themeTextStyle
@@ -74,9 +77,20 @@ fun NewsStory(newsItem: NewsItem) {
                 Text(text = newsItem.date,
                     style = (+themeTextStyle { body2 }).withOpacity(0.6f))
             }
+            Container(expanded = true, alignment = Alignment.CenterRight) {
+                LikeButton(likeButtonState = LikeButtonState())
+            }
         }
     }
 }
+
+@Composable
+fun LikeButton(likeButtonState: LikeButtonState) {
+    Button(text = "${likeButtonState.count} Like", onClick ={ likeButtonState.count++ })
+}
+
+@Model
+data class LikeButtonState(var count: Int = 0)
 
 @Preview
 @Composable
