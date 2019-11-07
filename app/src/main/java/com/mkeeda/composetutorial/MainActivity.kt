@@ -26,42 +26,51 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NewsStory()
+            MyApp {
+                NewsStory()
+            }
         }
     }
 }
 
 @Composable
-fun NewsStory() {
+fun MyApp(child: @Composable() () -> Unit) {
     MaterialTheme {
-        val image = +imageResource(R.drawable.header)
+        child()
+    }
+}
 
-        Column(
-            crossAxisSize = LayoutSize.Expand,
-            modifier = Spacing(16.dp)
-        ) {
-            Container(expanded = true, height = 180.dp) {
-                Clip(shape = RoundedCornerShape(8.dp)) {
-                    DrawImage(image = image)
-                }
+@Composable
+fun NewsStory() {
+    val image = +imageResource(R.drawable.header)
+
+    Column(
+        crossAxisSize = LayoutSize.Expand,
+        modifier = Spacing(16.dp)
+    ) {
+        Container(expanded = true, height = 180.dp) {
+            Clip(shape = RoundedCornerShape(8.dp)) {
+                DrawImage(image = image)
             }
-
-            HeightSpacer(height = 16.dp)
-
-            Text(text = "A day wandering through the sandhills in Shark " +
-                    "Fin Cove, and a few of the sights I saw",
-                maxLines = 2, overflow = TextOverflow.Ellipsis,
-                style = (+themeTextStyle { h6 }).withOpacity(0.87f))
-            Text(text = "Davenport, California",
-                style = (+themeTextStyle { body2 }).withOpacity(0.87f))
-            Text(text = "December 2018",
-                style = (+themeTextStyle { body2 }).withOpacity(0.6f))
         }
+
+        HeightSpacer(height = 16.dp)
+
+        Text(text = "A day wandering through the sandhills in Shark " +
+                "Fin Cove, and a few of the sights I saw",
+            maxLines = 2, overflow = TextOverflow.Ellipsis,
+            style = (+themeTextStyle { h6 }).withOpacity(0.87f))
+        Text(text = "Davenport, California",
+            style = (+themeTextStyle { body2 }).withOpacity(0.87f))
+        Text(text = "December 2018",
+            style = (+themeTextStyle { body2 }).withOpacity(0.6f))
     }
 }
 
 @Preview
 @Composable
 fun DefaultPreview() {
-    NewsStory()
+    MyApp {
+        NewsStory()
+    }
 }
