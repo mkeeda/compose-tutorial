@@ -9,6 +9,7 @@ import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.core.setContent
 import androidx.ui.foundation.DrawImage
+import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                NewsStory()
+                MyScreenContent()
             }
         }
     }
@@ -37,6 +38,19 @@ class MainActivity : AppCompatActivity() {
 fun MyApp(child: @Composable() () -> Unit) {
     MaterialTheme {
         child()
+    }
+}
+
+@Composable
+fun MyScreenContent() {
+    VerticalScroller {
+        Column(modifier = Spacing(8.dp)) {
+            NewsStory()
+            HeightSpacer(height = 16.dp)
+            NewsStory()
+            HeightSpacer(height = 16.dp)
+            NewsStory()
+        }
     }
 }
 
@@ -71,6 +85,6 @@ fun NewsStory() {
 @Composable
 fun DefaultPreview() {
     MyApp {
-        NewsStory()
+        MyScreenContent()
     }
 }
