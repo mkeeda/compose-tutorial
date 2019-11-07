@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.unaryPlus
-import androidx.ui.core.Clip
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.core.setContent
@@ -60,24 +59,21 @@ fun NewsStory(newsItem: NewsItem) {
 
     Card(elevation = 2.dp, shape = RoundedCornerShape(4.dp)) {
         Column(
-            crossAxisSize = LayoutSize.Expand,
-            modifier = Spacing(16.dp)
+            crossAxisSize = LayoutSize.Expand
         ) {
             Container(expanded = true, height = 180.dp) {
-                Clip(shape = RoundedCornerShape(8.dp)) {
-                    DrawImage(image = image)
-                }
+                DrawImage(image = image)
             }
 
-            HeightSpacer(height = 16.dp)
-
-            Text(text = newsItem.title,
-                maxLines = 2, overflow = TextOverflow.Ellipsis,
-                style = (+themeTextStyle { h6 }).withOpacity(0.87f))
-            Text(text = newsItem.author,
-                style = (+themeTextStyle { body2 }).withOpacity(0.87f))
-            Text(text = newsItem.date,
-                style = (+themeTextStyle { body2 }).withOpacity(0.6f))
+            Column(modifier = Spacing(16.dp)) {
+                Text(text = newsItem.title,
+                    maxLines = 2, overflow = TextOverflow.Ellipsis,
+                    style = (+themeTextStyle { h6 }).withOpacity(0.87f))
+                Text(text = newsItem.author,
+                    style = (+themeTextStyle { body2 }).withOpacity(0.87f))
+                Text(text = newsItem.date,
+                    style = (+themeTextStyle { body2 }).withOpacity(0.6f))
+            }
         }
     }
 }
